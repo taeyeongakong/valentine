@@ -1,106 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Be My Valentine?</title>
-  <style>
+<meta charset="UTF-8" />
+<title>Valentine Question</title>
+<style>
     body {
-      font-family: "Courier New", Courier, monospace;
-      text-align: center;
-      background: #ffffff;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+        background: white;
+        font-family: "Times New Roman", serif;
+        font-weight: 300;
+        color: black;
+        text-align: center;
+        padding-top: 120px;
     }
+
     h1 {
-      font-size: 3rem;
-      margin-bottom: 40px;
-      color: #d11f5f;
+        font-size: 40px;
+        margin-bottom: 40px;
+        font-weight: 300;
     }
-    #buttons {
-      display: flex;
-      gap: 40px;
-      position: relative;
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
     }
+
     button {
-      padding: 15px 30px;
-      font-size: 1.5rem;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
+        font-family: "Times New Roman", serif;
+        font-size: 20px;
+        padding: 12px 28px;
+        border: 1px solid black;
+        background: white;
+        cursor: pointer;
+        transition: 0.3s;
     }
-    #yesBtn {
-      background: #ff4f81;
-      color: white;
+
+    #no {
+        position: relative;
     }
-    #noBtn {
-      background: #bbb;
-      position: absolute;
-      transform: translate(150px, 0);
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <h1>Will you be my Valentine? ❤️</h1>
-  <div id="buttons">
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
-  </div>
+    <h1>Soyun, will you be my Valentine?</h1>
+    
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
+    <div class="button-container">
+        <button id="yes" onclick="alert('Yay! ❤️')">Yes</button>
+        <button id="no">No</button>
+    </div>
 
-    document.addEventListener("mousemove", (e) => {
-      const yesRect = yesBtn.getBoundingClientRect();
-      const noRect = noBtn.getBoundingClientRect();
-
-      const mouseDistX = e.clientX - (noRect.left + noRect.width / 2);
-      const mouseDistY = e.clientY - (noRect.top + noRect.height / 2);
-      const mouseDist = Math.sqrt(mouseDistX * mouseDistX + mouseDistY * mouseDistY);
-
-      // Distance between buttons to prevent overlap
-      const btnDistX = (yesRect.left + yesRect.width / 2) - (noRect.left + noRect.width / 2);
-      const btnDistY = (yesRect.top + yesRect.height / 2) - (noRect.top + noRect.height / 2);
-      const btnDist = Math.sqrt(btnDistX * btnDistX + btnDistY * btnDistY);
-
-      // Trigger movement if mouse is close OR if buttons get too close
-      if (mouseDist < 150 || btnDist < 180) {
-        const offsetX = (Math.random() - 0.5) * 400;
-        const offsetY = (Math.random() - 0.5) * 400;
-        noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-
-        // Grow yes button gradually
-        const currScale = parseFloat(getComputedStyle(yesBtn).transform.split(',')[0].replace('matrix(', '')) || 1;
-        const newScale = Math.min(currScale + 0.05, 2.5);
-        yesBtn.style.transform = `scale(${newScale})`;
-      }
-    });("mousemove", (e) => {
-      const rect = noBtn.getBoundingClientRect();
-      const distX = e.clientX - (rect.left + rect.width / 2);
-      const distY = e.clientY - (rect.top + rect.height / 2);
-      const dist = Math.sqrt(distX * distX + distY * distY);
-
-      if (dist < 150) {
-        const offsetX = (Math.random() - 0.5) * 300;
-        const offsetY = (Math.random() - 0.5) * 300;
-        noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-
-        // Gradually enlarge the Yes button
-        const currScale = parseFloat(getComputedStyle(yesBtn).transform.split(',')[0].replace('matrix(', '')) || 1;
-        const newScale = Math.min(currScale + 0.05, 2.5);
-        yesBtn.style.transform = `scale(${newScale})`;
-      }
-    });
-
-    yesBtn.addEventListener("click", () => {
-      document.body.innerHTML = "<h1>Yay! ❤️🥰</h1>";
-    });
-  </script>
+    <script>
+        const noBtn = document.getElementById("no");
+        noBtn.addEventListener("mouseover", () => {
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 200 - 100;
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    </script>
 </body>
 </html>
